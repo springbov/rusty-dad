@@ -1,0 +1,7 @@
+[package]
+name = "rusty-dad"
+version = "0.1.0"
+authors = ["seth"]
+
+[dependencies]
+rand = "0.3.16"
