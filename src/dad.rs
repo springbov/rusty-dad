@@ -2,6 +2,7 @@ extern crate rand;
 
 use self::rand::Rng;
 
+#[derive(Serialize, Deserialize)]
 pub struct Dad
 {
   age: u8,

@@ -1,14 +1,38 @@
+extern crate serde;
+extern crate serde_json;
+
+#[macro_use]
+extern crate serde_derive;
+
 mod dad;
+mod get_file;
+
 use dad::*;
+use get_file::*;
+
+use std::io;
 
 fn main() 
 {
-  let mut jokes = Vec::new();
-  jokes.push("Kid: \"But dad?!?!\"\nDad:\"Butt dad? did you just call me BUTT DAD! you're grounded\"".to_owned());
-  jokes.push("Hi hungry I'm dad!".to_owned());
-  jokes.push("Did you hear about the goldfish that went bankrupt? Now he's a bronze fish!".to_owned());
+  println!("Where is your dad.json?");
+  match read_dad_file(&read_line())
+  {
+    Err(x) => println!("Awe crap: {}", x),
+    Ok(daddy) => {
+      println!("{}", daddy.tell_joke());
+    }
+  };
 
-  let pappy = Dad::new(43, jokes); 
+}
 
-  println!("{}", pappy.tell_joke());
+fn read_line() -> String
+{
+  let mut input = String::new();
+  io::stdin()
+    .read_line(&mut input)
+    .expect("GAh, something went wrong while reading from standard in!");
+
+  input
+    .trim()
+    .to_owned()
 }
